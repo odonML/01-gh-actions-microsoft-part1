@@ -7,8 +7,6 @@ on:
 jobs:
   ejecutar_accion:
     runs-on: ubuntu-latest
-    # Solo actuamos si el ID del botón es 'fix_security'
-    if: github.event.requested_action.identifier == 'fix_security'
     
     steps:
       - name: Checkout del código
