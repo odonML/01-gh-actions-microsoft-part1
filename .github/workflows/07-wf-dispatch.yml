@@ -22,7 +22,7 @@ jobs:
             https://api.github.com/repos/${{ github.repository }}/check-runs \
             -d '{
               "name": "Linter DevOps",
-              "head_sha": "a5291b020ad1631b46065253e0ea70a62862c060",
+              "head_sha": "${{ github.sha }}",
               "status": "completed",
               "conclusion": "failure",
               "output": {
