@@ -1,39 +1,12 @@
-name: "Generador de Check con App"
+name: lint
 
 on:
-  workflow_dispatch: # Lo activaremos manualmente desde el botón "Run workflow"
+  pull_request:
+    branches: [main]
 
 jobs:
-  create-check:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Obtener Token de la App
-        id: get_token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_DEVOPS_CHECK_ID }}
-          private-key: ${{ secrets.APP_DEVOPS_CHECK_PRIVATE_KEY }}
-
-      - name: Crear Check Run vía API
-        run: |
-          curl -L -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ steps.get_token.outputs.token }}" \
-            https://api.github.com/repos/${{ github.repository }}/check-runs \
-            -d '{
-              "name": "Linter DevOps",
-              "head_sha": "${{ github.sha }}",
-              "status": "completed",
-              "conclusion": "failure",
-              "output": {
-                "title": "Error de Seguridad",
-                "summary": "Se requiere intervención manual."
-              },
-              "actions": [
-                {
-                  "label": "Corregir Ahora",
-                  "description": "Aplica el parche",
-                  "identifier": "fix_security"
-                }
-              ]
-            }'
+      - name: lint in proccess
+        run: echo lint success

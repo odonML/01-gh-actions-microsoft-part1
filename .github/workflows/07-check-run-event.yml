@@ -2,17 +2,15 @@ name: "07 check run event"
 
 on:
   check_run:
-    types: [requested_action] # Se dispara al hacer clic en un botón personalizado
+    types: [completed] # Se dispara al hacer clic en un botón personalizado
 
 jobs:
   ejecutar_accion:
+    if: ${{ github.event.check_run.name == 'lint'}}
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout del código
-        uses: actions/checkout@v4
-
-      - name: Simulando Corrección DevOps
+      - name: say hi
         run: |
-          echo "Ejecutando parche de seguridad solicitado por el usuario..."
-          echo "Check Run ID: ${{ github.event.check_run.id }}"
+          echo "se completo el check_run lint"
+          
