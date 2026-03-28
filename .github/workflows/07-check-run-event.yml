@@ -3,14 +3,13 @@ name: "07 check run event"
 permissions:
   checks: read       # Para leer los datos del check_run
   pull-requests: write # Si quieres comentar en el PR basado en ese check
-  
+
 on:
   check_run:
     types: [completed] # Se dispara al hacer clic en un botón personalizado
 
 jobs:
   ejecutar_accion:
-    if: ${{ github.event.check_run.name == 'lint'}}
     runs-on: ubuntu-latest
     
     steps:
